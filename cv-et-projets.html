@@ -5,7 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV et Projets</title>
     <style>
-        /* Styles existants ... */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #2d3748;
+            padding: 10px 0;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .navbar li {
+            display: inline;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #ffffff;
+            padding: 10px 20px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            transform: scale(1.1);
+        }
+        .content {
+            padding: 20px;
+        }
         .pdf-container {
             width: 100%;
             height: 800px;
@@ -15,7 +45,10 @@
 </head>
 <body>
     <nav class="navbar">
-        <!-- Barre de navigation existante ... -->
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="cv-et-projets.html">CV et Projets</a></li>
+        </ul>
     </nav>
     <div class="content">
         <h1>CV et Projets</h1>
@@ -23,16 +56,16 @@
         <h2>Curriculum Vitae</h2>
         <p>Vous pouvez consulter mon CV complet ici : <a href="CV_2024-10-10_Romain_Desmeulemester.pdf" target="_blank">Télécharger mon CV (PDF)</a></p>
         
-        <!-- Option 1 : Intégration directe du PDF -->
         <h3>Aperçu du CV :</h3>
         <iframe src="CV_2024-10-10_Romain_Desmeulemester.pdf" class="pdf-container"></iframe>
         
-        <!-- Option 2 : Intégration avec Google Docs Viewer -->
-        <h3>Aperçu du CV (alternative) :</h3>
-        <iframe src="https://docs.google.com/viewer?url=https://votre-nom-utilisateur.github.io/mon-cv.pdf&embedded=true" class="pdf-container"></iframe>
-        
         <h2>Projets</h2>
-        <!-- Liste de projets existante ... -->
+        <!-- Ajoutez ici la liste de vos projets -->
+        <ul>
+            <li>Projet 1 : Description du projet...</li>
+            <li>Projet 2 : Description du projet...</li>
+            <li>Projet 3 : Description du projet...</li>
+        </ul>
     </div>
 </body>
 </html>
