@@ -51,7 +51,7 @@ body {
     width: 100%;
     height: 800px;
     border: none;
-    transform: scale(0.75); /* Ajuster le niveau de zoom, par exemple 0.75 pour réduire à 75% */
+    transform: scale(0.5); 
     transform-origin: top left; /* Permet d'aligner le zoom sur le coin supérieur gauche */
 }
 
