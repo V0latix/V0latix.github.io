@@ -1,9 +1,10 @@
-/* fichier styles.css */
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .navbar {
@@ -36,6 +37,7 @@ body {
 
 .content {
     padding: 20px;
+    flex: 1;
 }
 
 .pdf-container {
@@ -48,6 +50,7 @@ body {
     background-color: #f3f4f6;
     padding: 10px 0;
     text-align: center;
+    margin-top: auto;
 }
 
 .social-banner a {
