@@ -11,6 +11,40 @@
     #setup, #gameArea {
       margin-top: 20px;
     }
+    /* Styles pour la saisie des noms */
+    #playersNames input {
+      margin: 5px 0;
+      padding: 4px;
+      width: 200px;
+    }
+    /* Styles de base pour représenter visuellement les cartes */
+    .card {
+      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 5px;
+      margin: 2px;
+      display: inline-block;
+      width: 60px;
+      height: 90px;
+      text-align: center;
+      line-height: 1.2;
+      vertical-align: top;
+      background: #fff;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+    .card.atout {
+      background: #f9e79f;
+    }
+    .card.excuse {
+      background: #d5f5e3;
+    }
+    .card.coeur, .card.carreau, .card.trèfle, .card.pique {
+      background: #ebedef;
+    }
+    /* Simple séparation entre joueurs */
+    .player-hand {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
@@ -25,6 +59,7 @@
       <option value="5">5</option>
       <option value="6">6</option>
     </select>
+    <div id="playersNames"></div>
     <button id="startGame">Commencer la partie</button>
   </div>
 
@@ -32,17 +67,19 @@
   <div id="gameArea" style="display:none;">
     <h2>Partie en cours</h2>
     <div id="playersInfo"></div>
+    <div id="cardsArea"></div>
   </div>
 
   <script>
     // Classe représentant une partie de tarot
     class TarotGame {
-      constructor(playerCount) {
+      constructor(playerCount, playersNames) {
         this.playerCount = playerCount;
         this.players = [];
-        // Création des joueurs
-        for(let i = 1; i <= playerCount; i++){
-          this.players.push({ id: i, name: `Joueur ${i}`, hand: []});
+        // Création des joueurs avec les noms fournis
+        for(let i = 0; i < playerCount; i++){
+          const name = playersNames[i] || `Joueur ${i+1}`;
+          this.players.push({ id: i+1, name: name, hand: [] });
         }
         // Création du deck de tarot
         this.deck = this.createDeck();
@@ -80,7 +117,6 @@
       dealCards() {
         this.shuffleDeck();
         // Distribution simplifiée : on distribue toutes les cartes en boucle aux joueurs.
-        // Remarque : les règles de distribution au tarot sont particulières et pourront être ajustées.
         let currentPlayer = 0;
         while(this.deck.length > 0) {
           const card = this.deck.pop();
@@ -97,19 +133,56 @@
       }
     }
 
+    // Mise à jour des inputs pour les noms en fonction du nombre de joueurs
+    const playerCountSelect = document.getElementById('playerCount');
+    const playersNamesDiv = document.getElementById('playersNames');
+    function updatePlayerNamesInputs() {
+      const count = parseInt(playerCountSelect.value);
+      playersNamesDiv.innerHTML = '';
+      for(let i = 1; i <= count; i++){
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = `Nom du joueur ${i}`;
+        input.id = `playerName${i}`;
+        playersNamesDiv.appendChild(input);
+        playersNamesDiv.appendChild(document.createElement('br'));
+      }
+    }
+    playerCountSelect.addEventListener('change', updatePlayerNamesInputs);
+    // Initialisation des inputs de noms
+    updatePlayerNamesInputs();
+
     // Gestion de l'événement de démarrage de partie
     document.getElementById('startGame').addEventListener('click', () => {
       const playerCount = parseInt(document.getElementById('playerCount').value);
-      const game = new TarotGame(playerCount);
+      const playersNames = [];
+      for(let i = 1; i <= playerCount; i++){
+        const nameInput = document.getElementById(`playerName${i}`);
+        playersNames.push(nameInput.value.trim() || `Joueur ${i}`);
+      }
+      
+      const game = new TarotGame(playerCount, playersNames);
       game.start();
       
-      // Masque la zone de configuration et affiche la zone de jeu
+      // Masquer la zone de configuration et afficher la zone de jeu
       document.getElementById('setup').style.display = 'none';
       document.getElementById('gameArea').style.display = 'block';
       
       // Affiche quelques infos sur les joueurs
       const playersInfo = document.getElementById('playersInfo');
-      playersInfo.innerHTML = game.players.map(player => `<p>${player.name} : ${player.hand.length} cartes</p>`).join('');
+      playersInfo.innerHTML = game.players
+        .map(player => `<p>${player.name} : ${player.hand.length} cartes</p>`)
+        .join('');
+
+      // Affichage visuel des cartes pour chaque joueur
+      const cardsArea = document.getElementById('cardsArea');
+      cardsArea.innerHTML = game.players.map(player => {
+        return `<div class="player-hand"><h3>${player.name}</h3>` +
+               player.hand.map(card => {
+                 return `<div class="card ${card.type}">${card.type}<br>${card.value}</div>`;
+               }).join('') +
+               `</div>`;
+      }).join('');
     });
   </script>
 </body>
