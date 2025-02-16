@@ -2,22 +2,13 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Jeu de Tarot</title>
+  <title>Jeu de Tarot Multi-joueurs</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
     }
-    #setup, #gameArea {
-      margin-top: 20px;
-    }
-    /* Styles pour la saisie des noms */
-    #playersNames input {
-      margin: 5px 0;
-      padding: 4px;
-      width: 200px;
-    }
-    /* Styles de base pour représenter visuellement les cartes */
+    /* Styles pour représenter visuellement les cartes */
     .card {
       border: 1px solid #000;
       border-radius: 5px;
@@ -41,149 +32,193 @@
     .card.coeur, .card.carreau, .card.trèfle, .card.pique {
       background: #ebedef;
     }
-    /* Simple séparation entre joueurs */
     .player-hand {
       margin-bottom: 20px;
     }
   </style>
+  <!-- Chargement des modules Firebase via CDN -->
+  <script type="module">
+    // Import des modules Firebase depuis le CDN
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, updateDoc, arrayUnion, onSnapshot, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+
+    // --- Configuration Firebase (donnée par la console Firebase) ---
+    const firebaseConfig = {
+      apiKey: "AIzaSyCCKShBZwo6G5V3vGf3oCV6YkhutiN-gFo",
+      authDomain: "tarot-c241b.firebaseapp.com",
+      projectId: "tarot-c241b",
+      storageBucket: "tarot-c241b.firebasestorage.app",
+      messagingSenderId: "337432549069",
+      appId: "1:337432549069:web:cb300d47d2bb0be2757b84",
+      measurementId: "G-P90S5E4MFS"
+    };
+
+    // Initialisation de Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // ID fixe de la salle de jeu
+    const GAME_ID = "tarotGameRoom1";
+
+    // --- Interface utilisateur ---
+    // Zones de l'interface
+    const loginDiv = document.getElementById("login");
+    const gameRoomDiv = document.getElementById("gameRoom");
+    const displayNameSpan = document.getElementById("displayName");
+    const loginButton = document.getElementById("loginButton");
+    const usernameInput = document.getElementById("username");
+    const startGameButton = document.getElementById("startGame");
+    const gameAreaDiv = document.getElementById("gameArea");
+    const handDiv = document.getElementById("hand");
+    let currentUser = null;
+
+    // --- Connexion du joueur ---
+    loginButton.addEventListener("click", async () => {
+      const username = usernameInput.value.trim();
+      if (!username) {
+        alert("Merci d'entrer un pseudo.");
+        return;
+      }
+      try {
+        // Connexion anonyme
+        const userCredential = await signInAnonymously(auth);
+        currentUser = userCredential.user;
+        // Ajout du joueur dans la salle de jeu Firestore
+        const playerDocRef = doc(db, "games", GAME_ID, "players", currentUser.uid);
+        await setDoc(playerDocRef, { name: username, hand: [] });
+        // Mise à jour de l'interface
+        loginDiv.style.display = "none";
+        gameRoomDiv.style.display = "block";
+        displayNameSpan.textContent = username;
+        // Abonnement à sa main
+        subscribeToHand();
+        // Vérification du rôle d'hôte
+        checkIfHost();
+      } catch (error) {
+        console.error("Erreur de connexion :", error);
+      }
+    });
+
+    // --- Vérifier si le joueur est l'hôte ---
+    async function checkIfHost() {
+      const playersCol = collection(db, "games", GAME_ID, "players");
+      const playersSnapshot = await getDocs(playersCol);
+      const players = [];
+      playersSnapshot.forEach(docSnap => {
+        players.push({ id: docSnap.id, ...docSnap.data() });
+      });
+      // Pour simplifier, le premier joueur inscrit (celui récupéré en premier) est l'hôte
+      if (players.length > 0 && players[0].id === currentUser.uid) {
+        startGameButton.style.display = "block";
+      }
+    }
+
+    // --- Abonnement aux mises à jour de sa main ---
+    function subscribeToHand() {
+      const playerDocRef = doc(db, "games", GAME_ID, "players", currentUser.uid);
+      onSnapshot(playerDocRef, (docSnapshot) => {
+        const data = docSnapshot.data();
+        handDiv.innerHTML = ""; // Réinitialise l'affichage
+        if (data && data.hand) {
+          data.hand.forEach(card => {
+            const cardDiv = document.createElement("div");
+            cardDiv.className = "card " + card.type;
+            cardDiv.innerHTML = `${card.type}<br>${card.value}`;
+            handDiv.appendChild(cardDiv);
+          });
+        }
+        // Affiche la zone de jeu dès qu'une main est disponible
+        gameAreaDiv.style.display = "block";
+      });
+    }
+
+    // --- Distribution des cartes (déclenchée par l'hôte) ---
+    startGameButton.addEventListener("click", async () => {
+      // Récupère la liste des joueurs dans la salle
+      const playersCol = collection(db, "games", GAME_ID, "players");
+      const playersSnapshot = await getDocs(playersCol);
+      const players = [];
+      playersSnapshot.forEach(docSnap => {
+        players.push({ uid: docSnap.id, ...docSnap.data() });
+      });
+
+      const playerCount = players.length;
+      if (playerCount < 3 || playerCount > 6) {
+        alert("Le nombre de joueurs doit être entre 3 et 6.");
+        return;
+      }
+
+      // Création et mélange du deck
+      let deck = createDeck();
+      shuffle(deck);
+
+      // Distribution des cartes aux joueurs (en boucle)
+      let currentPlayer = 0;
+      while (deck.length > 0) {
+        const card = deck.pop();
+        const playerUid = players[currentPlayer].uid;
+        const playerDocRef = doc(db, "games", GAME_ID, "players", playerUid);
+        await updateDoc(playerDocRef, {
+          hand: arrayUnion(card)
+        });
+        currentPlayer = (currentPlayer + 1) % playerCount;
+      }
+    });
+
+    // --- Fonctions utilitaires ---
+
+    // Créer le deck complet de Tarot (78 cartes)
+    function createDeck() {
+      const deck = [];
+      // Atouts 1 à 21
+      for (let i = 1; i <= 21; i++) {
+        deck.push({ type: 'atout', value: i });
+      }
+      // La carte de l'excuse
+      deck.push({ type: 'excuse', value: 'excuse' });
+      // Cartes de couleur (4 enseignes, 14 cartes chacune)
+      const colors = ['coeur', 'carreau', 'trèfle', 'pique'];
+      const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'valet', 'cavalier', 'dame', 'roi'];
+      for (let color of colors) {
+        for (let value of values) {
+          deck.push({ type: color, value: value });
+        }
+      }
+      return deck;
+    }
+
+    // Mélange du deck (algorithme de Fisher-Yates)
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+  </script>
 </head>
 <body>
-  <h1>Jeu de Tarot</h1>
-  
-  <!-- Zone de configuration -->
-  <div id="setup">
-    <label for="playerCount">Nombre de joueurs (3 à 6) :</label>
-    <select id="playerCount">
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-    </select>
-    <div id="playersNames"></div>
-    <button id="startGame">Commencer la partie</button>
+  <h1>Jeu de Tarot Multi-joueurs</h1>
+
+  <!-- Zone de connexion -->
+  <div id="login">
+    <input type="text" id="username" placeholder="Entrez votre pseudo">
+    <button id="loginButton">Se connecter</button>
   </div>
 
-  <!-- Zone de jeu -->
-  <div id="gameArea" style="display:none;">
-    <h2>Partie en cours</h2>
-    <div id="playersInfo"></div>
-    <div id="cardsArea"></div>
+  <!-- Salle de jeu -->
+  <div id="gameRoom" style="display:none;">
+    <p>Bienvenue, <span id="displayName"></span></p>
+    <!-- Bouton pour démarrer la partie (affiché uniquement pour l'hôte) -->
+    <button id="startGame" style="display:none;">Commencer la partie (Hôte)</button>
+    <!-- Zone de jeu : chaque joueur ne voit que sa propre main -->
+    <div id="gameArea" style="display:none;">
+      <h2>Votre main</h2>
+      <div id="hand"></div>
+    </div>
   </div>
-
-  <script>
-    // Classe représentant une partie de tarot
-    class TarotGame {
-      constructor(playerCount, playersNames) {
-        this.playerCount = playerCount;
-        this.players = [];
-        // Création des joueurs avec les noms fournis
-        for(let i = 0; i < playerCount; i++){
-          const name = playersNames[i] || `Joueur ${i+1}`;
-          this.players.push({ id: i+1, name: name, hand: [] });
-        }
-        // Création du deck de tarot
-        this.deck = this.createDeck();
-      }
-      
-      // Création du deck de Tarot (78 cartes)
-      createDeck() {
-        const deck = [];
-        // Les atouts (trumps) numérotés de 1 à 21
-        for(let i = 1; i <= 21; i++){
-          deck.push({ type: 'atout', value: i });
-        }
-        // La carte de l'excuse
-        deck.push({ type: 'excuse', value: 'excuse' });
-        // Les cartes de couleur : 4 enseignes avec 14 cartes chacune
-        const colors = ['coeur', 'carreau', 'trèfle', 'pique'];
-        const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'valet', 'cavalier', 'dame', 'roi'];
-        for (let color of colors) {
-          for(let value of values){
-            deck.push({ type: color, value: value });
-          }
-        }
-        return deck;
-      }
-      
-      // Mélange du deck (algorithme de Fisher-Yates)
-      shuffleDeck() {
-        for (let i = this.deck.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]];
-        }
-      }
-      
-      // Distribution des cartes aux joueurs
-      dealCards() {
-        this.shuffleDeck();
-        // Distribution simplifiée : on distribue toutes les cartes en boucle aux joueurs.
-        let currentPlayer = 0;
-        while(this.deck.length > 0) {
-          const card = this.deck.pop();
-          this.players[currentPlayer].hand.push(card);
-          currentPlayer = (currentPlayer + 1) % this.playerCount;
-        }
-      }
-      
-      // Lancement de la partie
-      start() {
-        this.dealCards();
-        console.log("Partie commencée !");
-        console.log("Distribution des cartes :", this.players);
-      }
-    }
-
-    // Mise à jour des inputs pour les noms en fonction du nombre de joueurs
-    const playerCountSelect = document.getElementById('playerCount');
-    const playersNamesDiv = document.getElementById('playersNames');
-    function updatePlayerNamesInputs() {
-      const count = parseInt(playerCountSelect.value);
-      playersNamesDiv.innerHTML = '';
-      for(let i = 1; i <= count; i++){
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.placeholder = `Nom du joueur ${i}`;
-        input.id = `playerName${i}`;
-        playersNamesDiv.appendChild(input);
-        playersNamesDiv.appendChild(document.createElement('br'));
-      }
-    }
-    playerCountSelect.addEventListener('change', updatePlayerNamesInputs);
-    // Initialisation des inputs de noms
-    updatePlayerNamesInputs();
-
-    // Gestion de l'événement de démarrage de partie
-    document.getElementById('startGame').addEventListener('click', () => {
-      const playerCount = parseInt(document.getElementById('playerCount').value);
-      const playersNames = [];
-      for(let i = 1; i <= playerCount; i++){
-        const nameInput = document.getElementById(`playerName${i}`);
-        playersNames.push(nameInput.value.trim() || `Joueur ${i}`);
-      }
-      
-      const game = new TarotGame(playerCount, playersNames);
-      game.start();
-      
-      // Masquer la zone de configuration et afficher la zone de jeu
-      document.getElementById('setup').style.display = 'none';
-      document.getElementById('gameArea').style.display = 'block';
-      
-      // Affiche quelques infos sur les joueurs
-      const playersInfo = document.getElementById('playersInfo');
-      playersInfo.innerHTML = game.players
-        .map(player => `<p>${player.name} : ${player.hand.length} cartes</p>`)
-        .join('');
-
-      // Affichage visuel des cartes pour chaque joueur
-      const cardsArea = document.getElementById('cardsArea');
-      cardsArea.innerHTML = game.players.map(player => {
-        return `<div class="player-hand"><h3>${player.name}</h3>` +
-               player.hand.map(card => {
-                 return `<div class="card ${card.type}">${card.type}<br>${card.value}</div>`;
-               }).join('') +
-               `</div>`;
-      }).join('');
-    });
-  </script>
 </body>
 </html>
