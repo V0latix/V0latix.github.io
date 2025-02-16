@@ -4,39 +4,36 @@
   <meta charset="UTF-8">
   <title>Jeu de Tarot Multi-joueurs</title>
   <style>
+    /* Tes styles ici */
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
     }
-    /* Styles pour représenter visuellement les cartes */
-    .card {
-      border: 1px solid #000;
-      border-radius: 5px;
-      padding: 5px;
-      margin: 2px;
-      display: inline-block;
-      width: 60px;
-      height: 90px;
-      text-align: center;
-      line-height: 1.2;
-      vertical-align: top;
-      background: #fff;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-    }
-    .card.atout {
-      background: #f9e79f;
-    }
-    .card.excuse {
-      background: #d5f5e3;
-    }
-    .card.coeur, .card.carreau, .card.trèfle, .card.pique {
-      background: #ebedef;
-    }
-    .player-hand {
-      margin-bottom: 20px;
-    }
+    /* ... autres styles ... */
   </style>
-  <!-- Chargement des modules Firebase via CDN -->
+</head>
+<body>
+  <h1>Jeu de Tarot Multi-joueurs</h1>
+
+  <!-- Zone de connexion -->
+  <div id="login">
+    <input type="text" id="username" placeholder="Entrez votre pseudo">
+    <button id="loginButton">Se connecter</button>
+  </div>
+
+  <!-- Salle de jeu -->
+  <div id="gameRoom" style="display:none;">
+    <p>Bienvenue, <span id="displayName"></span></p>
+    <!-- Bouton pour démarrer la partie (affiché uniquement pour l'hôte) -->
+    <button id="startGame" style="display:none;">Commencer la partie (Hôte)</button>
+    <!-- Zone de jeu : chaque joueur ne voit que sa propre main -->
+    <div id="gameArea" style="display:none;">
+      <h2>Votre main</h2>
+      <div id="hand"></div>
+    </div>
+  </div>
+
+  <!-- Déplacer le script à la fin du body -->
   <script type="module">
     // Import des modules Firebase depuis le CDN
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
@@ -44,7 +41,7 @@
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
     import { getFirestore, doc, setDoc, updateDoc, arrayUnion, onSnapshot, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
-    // --- Configuration Firebase (donnée par la console Firebase) ---
+    // --- Configuration Firebase ---
     const firebaseConfig = {
       apiKey: "AIzaSyCCKShBZwo6G5V3vGf3oCV6YkhutiN-gFo",
       authDomain: "tarot-c241b.firebaseapp.com",
@@ -64,8 +61,7 @@
     // ID fixe de la salle de jeu
     const GAME_ID = "tarotGameRoom1";
 
-    // --- Interface utilisateur ---
-    // Zones de l'interface
+    // --- Zones de l'interface ---
     const loginDiv = document.getElementById("login");
     const gameRoomDiv = document.getElementById("gameRoom");
     const displayNameSpan = document.getElementById("displayName");
@@ -138,7 +134,6 @@
 
     // --- Distribution des cartes (déclenchée par l'hôte) ---
     startGameButton.addEventListener("click", async () => {
-      // Récupère la liste des joueurs dans la salle
       const playersCol = collection(db, "games", GAME_ID, "players");
       const playersSnapshot = await getDocs(playersCol);
       const players = [];
@@ -170,17 +165,12 @@
     });
 
     // --- Fonctions utilitaires ---
-
-    // Créer le deck complet de Tarot (78 cartes)
     function createDeck() {
       const deck = [];
-      // Atouts 1 à 21
       for (let i = 1; i <= 21; i++) {
         deck.push({ type: 'atout', value: i });
       }
-      // La carte de l'excuse
       deck.push({ type: 'excuse', value: 'excuse' });
-      // Cartes de couleur (4 enseignes, 14 cartes chacune)
       const colors = ['coeur', 'carreau', 'trèfle', 'pique'];
       const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'valet', 'cavalier', 'dame', 'roi'];
       for (let color of colors) {
@@ -191,7 +181,6 @@
       return deck;
     }
 
-    // Mélange du deck (algorithme de Fisher-Yates)
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -199,26 +188,5 @@
       }
     }
   </script>
-</head>
-<body>
-  <h1>Jeu de Tarot Multi-joueurs</h1>
-
-  <!-- Zone de connexion -->
-  <div id="login">
-    <input type="text" id="username" placeholder="Entrez votre pseudo">
-    <button id="loginButton">Se connecter</button>
-  </div>
-
-  <!-- Salle de jeu -->
-  <div id="gameRoom" style="display:none;">
-    <p>Bienvenue, <span id="displayName"></span></p>
-    <!-- Bouton pour démarrer la partie (affiché uniquement pour l'hôte) -->
-    <button id="startGame" style="display:none;">Commencer la partie (Hôte)</button>
-    <!-- Zone de jeu : chaque joueur ne voit que sa propre main -->
-    <div id="gameArea" style="display:none;">
-      <h2>Votre main</h2>
-      <div id="hand"></div>
-    </div>
-  </div>
 </body>
 </html>
