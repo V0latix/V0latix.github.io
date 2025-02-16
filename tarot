@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Jeu de Tarot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #setup, #gameArea {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Jeu de Tarot</h1>
+  
+  <!-- Zone de configuration -->
+  <div id="setup">
+    <label for="playerCount">Nombre de joueurs (3 à 6) :</label>
+    <select id="playerCount">
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
+    <button id="startGame">Commencer la partie</button>
+  </div>
+
+  <!-- Zone de jeu -->
+  <div id="gameArea" style="display:none;">
+    <h2>Partie en cours</h2>
+    <div id="playersInfo"></div>
+  </div>
+
+  <script>
+    // Classe représentant une partie de tarot
+    class TarotGame {
+      constructor(playerCount) {
+        this.playerCount = playerCount;
+        this.players = [];
+        // Création des joueurs
+        for(let i = 1; i <= playerCount; i++){
+          this.players.push({ id: i, name: `Joueur ${i}`, hand: []});
+        }
+        // Création du deck de tarot
+        this.deck = this.createDeck();
+      }
+      
+      // Création du deck de Tarot (78 cartes)
+      createDeck() {
+        const deck = [];
+        // Les atouts (trumps) numérotés de 1 à 21
+        for(let i = 1; i <= 21; i++){
+          deck.push({ type: 'atout', value: i });
+        }
+        // La carte de l'excuse
+        deck.push({ type: 'excuse', value: 'excuse' });
+        // Les cartes de couleur : 4 enseignes avec 14 cartes chacune
+        const colors = ['coeur', 'carreau', 'trèfle', 'pique'];
+        const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'valet', 'cavalier', 'dame', 'roi'];
+        for (let color of colors) {
+          for(let value of values){
+            deck.push({ type: color, value: value });
+          }
+        }
+        return deck;
+      }
+      
+      // Mélange du deck (algorithme de Fisher-Yates)
+      shuffleDeck() {
+        for (let i = this.deck.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]];
+        }
+      }
+      
+      // Distribution des cartes aux joueurs
+      dealCards() {
+        this.shuffleDeck();
+        // Distribution simplifiée : on distribue toutes les cartes en boucle aux joueurs.
+        // Remarque : les règles de distribution au tarot sont particulières et pourront être ajustées.
+        let currentPlayer = 0;
+        while(this.deck.length > 0) {
+          const card = this.deck.pop();
+          this.players[currentPlayer].hand.push(card);
+          currentPlayer = (currentPlayer + 1) % this.playerCount;
+        }
+      }
+      
+      // Lancement de la partie
+      start() {
+        this.dealCards();
+        console.log("Partie commencée !");
+        console.log("Distribution des cartes :", this.players);
+      }
+    }
+
+    // Gestion de l'événement de démarrage de partie
+    document.getElementById('startGame').addEventListener('click', () => {
+      const playerCount = parseInt(document.getElementById('playerCount').value);
+      const game = new TarotGame(playerCount);
+      game.start();
+      
+      // Masque la zone de configuration et affiche la zone de jeu
+      document.getElementById('setup').style.display = 'none';
+      document.getElementById('gameArea').style.display = 'block';
+      
+      // Affiche quelques infos sur les joueurs
+      const playersInfo = document.getElementById('playersInfo');
+      playersInfo.innerHTML = game.players.map(player => `<p>${player.name} : ${player.hand.length} cartes</p>`).join('');
+    });
+  </script>
+</body>
+</html>
