@@ -5,13 +5,69 @@
   <link rel="stylesheet" href="styles.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mon Site GitHub Pages</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .navbar {
+      background-color: #333;
+      overflow: hidden;
+    }
+    .navbar ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar li {
+      float: left;
+    }
+    .navbar li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+    .navbar li a:hover {
+      background-color: #575757;
+    }
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+    .content h1 {
+      color: #333;
+    }
+    .social-banner {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+    }
+    .social-banner a {
+      margin: 0 10px;
+      display: inline-block;
+    }
+    .social-icon {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      transition: fill 0.3s;
+    }
+    .social-banner a:hover .social-icon {
+      fill: #1da1f2;
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar">
     <ul>
       <li><a href="index.html">Accueil</a></li>
       <li><a href="cv-et-projets.html">CV et Projets</a></li>
-      <li><a href="tarot.html">Jeux</a></li>
+      <li><a href="snake.html">Jeu de Snake</a></li>
     </ul>
   </nav>
   
