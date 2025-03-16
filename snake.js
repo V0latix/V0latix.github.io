@@ -107,21 +107,24 @@ function startGame() {
 function endGame() {
     // Afficher le bouton "Rejouer"
     document.getElementById("replayButton").style.display = "block";
-    // Mettre à jour le leaderboard
-    updateLeaderboard(score);
+    // Demander le nom du joueur
+    let playerName = prompt("Entrez votre nom :");
+    if (playerName) {
+        updateLeaderboard(playerName, score);
+    }
 }
 
-function updateLeaderboard(newScore) {
+function updateLeaderboard(playerName, newScore) {
     let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-    leaderboard.push(newScore);
-    leaderboard.sort((a, b) => b - a);
+    leaderboard.push({ name: playerName, score: newScore });
+    leaderboard.sort((a, b) => b.score - a.score);
     leaderboard = leaderboard.slice(0, 10);
     localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 
     let leaderboardElement = document.getElementById("leaderboard");
     leaderboardElement.innerHTML = "<h2>Top 10 Scores</h2>";
-    leaderboard.forEach((score, index) => {
-        leaderboardElement.innerHTML += `<p>${index + 1}. ${score}</p>`;
+    leaderboard.forEach((entry, index) => {
+        leaderboardElement.innerHTML += `<p>${index + 1}. ${entry.name}: ${entry.score}</p>`;
     });
 }
 
