@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Jeu de Snake</title>
-    <style>
-        canvas {
-            border: 1px solid black;
-            display: block;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -24,6 +17,8 @@
     <div class="content">
         <h1>Jeu de Snake</h1>
         <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <button id="replayButton" style="display: none;">Rejouer</button>
+        <div id="leaderboard"></div>
     </div>
     <script src="snake.js"></script>
 </body>

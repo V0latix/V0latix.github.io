@@ -12,6 +12,7 @@ let food = {
 
 let score = 0;
 let d;
+let game;
 
 document.addEventListener("keydown", direction);
 
@@ -37,17 +38,22 @@ function collision(newHead, snake) {
 }
 
 function draw() {
-    ctx.fillStyle = "white";
+    // Fond du canvas
+    ctx.fillStyle = "#f4f4f4";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    // Dessiner le serpent
     for (let i = 0; i < snake.length; i++) {
-        ctx.fillStyle = (i == 0) ? "green" : "white";
-        ctx.strokeStyle = "black";
+        ctx.fillStyle = (i == 0) ? "#4CAF50" : "#8BC34A";
+        ctx.strokeStyle = "#388E3C";
+        ctx.lineJoin = "round";
+        ctx.lineWidth = 5;
         ctx.fillRect(snake[i].x, snake[i].y, box, box);
         ctx.strokeRect(snake[i].x, snake[i].y, box, box);
     }
 
-    ctx.fillStyle = "red";
+    // Dessiner la nourriture
+    ctx.fillStyle = "#FF5722";
     ctx.fillRect(food.x, food.y, box, box);
 
     let snakeX = snake[0].x;
@@ -75,13 +81,54 @@ function draw() {
 
     if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || collision(newHead, snake)) {
         clearInterval(game);
+        endGame();
     }
 
     snake.unshift(newHead);
 
-    ctx.fillStyle = "black";
-    ctx.font = "45px Changa one";
+    // Afficher le score
+    ctx.fillStyle = "#333";
+    ctx.font = "45px Arial";
     ctx.fillText(score, 2 * box, 1.6 * box);
 }
 
-let game = setInterval(draw, 100);
+function startGame() {
+    snake = [];
+    snake[0] = { x: 9 * box, y: 10 * box };
+    score = 0;
+    d = null;
+    food = {
+        x: Math.floor(Math.random() * 19 + 1) * box,
+        y: Math.floor(Math.random() * 19 + 1) * box
+    };
+    game = setInterval(draw, 100);
+}
+
+function endGame() {
+    // Afficher le bouton "Rejouer"
+    document.getElementById("replayButton").style.display = "block";
+    // Mettre à jour le leaderboard
+    updateLeaderboard(score);
+}
+
+function updateLeaderboard(newScore) {
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    leaderboard.push(newScore);
+    leaderboard.sort((a, b) => b - a);
+    leaderboard = leaderboard.slice(0, 10);
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+    let leaderboardElement = document.getElementById("leaderboard");
+    leaderboardElement.innerHTML = "<h2>Top 10 Scores</h2>";
+    leaderboard.forEach((score, index) => {
+        leaderboardElement.innerHTML += `<p>${index + 1}. ${score}</p>`;
+    });
+}
+
+document.getElementById("replayButton").addEventListener("click", () => {
+    document.getElementById("replayButton").style.display = "none";
+    startGame();
+});
+
+// Initialiser le jeu
+startGame();
