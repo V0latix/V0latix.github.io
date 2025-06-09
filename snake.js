@@ -1,3 +1,16 @@
+import { app } from './firebaseConfig.js';
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    limit,
+    getDocs
+} from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js';
+
+const db = getFirestore(app);
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -114,17 +127,22 @@ function endGame() {
     }
 }
 
-function updateLeaderboard(playerName, newScore) {
-    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-    leaderboard.push({ name: playerName, score: newScore });
-    leaderboard.sort((a, b) => b.score - a.score);
-    leaderboard = leaderboard.slice(0, 10);
-    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+async function updateLeaderboard(playerName, newScore) {
+    await addDoc(collection(db, "snake_leaderboard"), {
+        name: playerName,
+        score: newScore
+    });
+    await loadLeaderboard();
+}
 
-    let leaderboardElement = document.getElementById("leaderboard");
+async function loadLeaderboard() {
+    const leaderboardElement = document.getElementById("leaderboard");
     leaderboardElement.innerHTML = "<h2>Top 10 Scores</h2>";
-    leaderboard.forEach((entry, index) => {
-        leaderboardElement.innerHTML += `<p>${index + 1}. ${entry.name}: ${entry.score}</p>`;
+    const q = query(collection(db, "snake_leaderboard"), orderBy("score", "desc"), limit(10));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.docs.forEach((docSnap, index) => {
+        const data = docSnap.data();
+        leaderboardElement.innerHTML += `<p>${index + 1}. ${data.name}: ${data.score}</p>`;
     });
 }
 
@@ -135,3 +153,4 @@ document.getElementById("replayButton").addEventListener("click", () => {
 
 // Initialiser le jeu
 startGame();
+loadLeaderboard();
