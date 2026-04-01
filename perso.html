@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perso | Romain Desmeulemester</title>
+  <meta name="description" content="Notes personnelles et listes de Romain Desmeulemester.">
+  <meta property="og:title" content="Perso — Romain Desmeulemester">
+  <meta property="og:description" content="Notes, listes et ce qui compte en dehors du boulot.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://v0latix.github.io/perso.html">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(t==='dark')document.documentElement.dataset.theme='dark';})()</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navigation principale">
+      <a class="nav-brand" href="index.html">Romain D.</a>
+      <ul class="nav-links">
+        <li><a href="pro.html">Pro</a></li>
+        <li><a href="perso.html" class="is-active">Perso</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn-icon" href="https://github.com/V0latix" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <button class="btn-icon theme-toggle" onclick="toggleTheme()" aria-label="Changer le thème">&#9790;</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Section</span>
+        <h1>Perso</h1>
+        <p class="lead">Notes, listes et ce qui compte en dehors du boulot.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Mes listes</h2>
+        <p style="color: var(--muted); font-size: 0.85rem; margin-bottom: 24px;">
+          Notes personnelles — pour ajouter une entrée, copier une ligne &lt;tr&gt; et modifier le contenu.
+        </p>
+        <div class="lists-grid">
+
+          <!-- ===== Films ===== -->
+          <article class="list-card">
+            <div class="list-card-header">
+              <span class="list-card-emoji">🎬</span>
+              <h2>Films</h2>
+              <!-- Mettre à jour le compteur manuellement -->
+              <span class="list-count">0 entrée</span>
+            </div>
+            <table class="list-table">
+              <tbody>
+                <!--
+                  Structure d'une entrée :
+                  <tr>
+                    <td class="item-name">Nom du film</td>
+                    <td class="item-meta">2024</td>
+                    <td class="rating">★★★★☆</td>
+                  </tr>
+                -->
+              </tbody>
+            </table>
+          </article>
+
+          <!-- ===== Bières ===== -->
+          <article class="list-card">
+            <div class="list-card-header">
+              <span class="list-card-emoji">🍺</span>
+              <h2>Bières</h2>
+              <span class="list-count">0 entrée</span>
+            </div>
+            <table class="list-table">
+              <tbody>
+                <!--
+                  Structure d'une entrée :
+                  <tr>
+                    <td class="item-name">Nom de la bière</td>
+                    <td class="item-meta">Brasserie / Type</td>
+                    <td class="rating">★★★★☆</td>
+                  </tr>
+                -->
+              </tbody>
+            </table>
+          </article>
+
+          <!-- Ajouter d'autres list-card ici en dupliquant le bloc ci-dessus -->
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a class="footer-brand" href="index.html">Romain Desmeulemester</a>
+      <span class="footer-muted">Paris · 2025</span>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>
