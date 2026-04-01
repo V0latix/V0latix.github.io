@@ -3,184 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de Romain Desmeulemester, développeur web. Projets, compétences et CV.">
-  <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Romain Desmeulemester | Développeur web">
-  <meta property="og:description" content="Portfolio professionnel : projets, compétences et CV.">
+  <title>Romain Desmeulemester</title>
+  <meta name="description" content="Portfolio de Romain Desmeulemester — développeur web & data. Projets, CV, et plus.">
+  <meta property="og:title" content="Romain Desmeulemester">
+  <meta property="og:description" content="Développeur web & passionné de data — Paris">
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="assets/og-image.jpg">
   <meta property="og:url" content="https://v0latix.github.io/">
-  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <title>Romain Desmeulemester | Développeur web</title>
+  <!-- Anti-FOUC : lire le thème avant le rendu -->
+  <script>(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(t==='dark')document.documentElement.dataset.theme='dark';})()</script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Aller au contenu principal</a>
+  <a class="skip-link" href="#main">Aller au contenu</a>
 
   <header class="site-header">
     <nav class="nav container" aria-label="Navigation principale">
-      <a class="brand" href="index.html">Romain Desmeulemester</a>
-      <div class="nav-group">
-        <ul class="nav-links">
-          <li><a href="#a-propos">À propos</a></li>
-          <li><a href="#projets">Projets</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="cv-et-projets.html">CV & Projets</a></li>
-        </ul>
-        <a class="btn btn-ghost" href="mailto:romain.desmeulemester@gmail.com">Me contacter</a>
+      <a class="nav-brand" href="index.html">Romain D.</a>
+      <ul class="nav-links">
+        <li><a href="pro.html">Pro</a></li>
+        <li><a href="perso.html">Perso</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn-icon" href="https://github.com/V0latix" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <button class="btn-icon theme-toggle" onclick="toggleTheme()" aria-label="Changer le thème">&#9790;</button>
       </div>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero section" id="accueil">
-      <div class="container hero-grid">
-        <div>
-          <p class="eyebrow">Développeur web</p>
-          <h1>Un site professionnel, clair et orienté résultat.</h1>
-          <p class="lead">
-            Je conçois des interfaces modernes et accessibles pour valoriser vos projets et renforcer votre présence en ligne.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="cv-et-projets.html">Voir mon CV & projets</a>
-            <a class="btn btn-ghost" href="#contact">Me contacter</a>
-          </div>
-          <div class="hero-badges">
-            <span class="badge">UI/UX</span>
-            <span class="badge">Front-end</span>
-            <span class="badge">Performance</span>
-          </div>
+
+    <section class="hero">
+      <div class="container">
+        <p class="hero-eyebrow">Développeur web & data · Paris</p>
+        <h1>Romain<br>Desmeulemester</h1>
+        <p class="hero-lead">
+          Je construis des interfaces et des outils web propres, rapides et agréables à utiliser.
+          Passionné par les données, l'IA et les projets qui ont du sens.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="pro.html">Côté Pro →</a>
+          <a class="btn btn-secondary" href="perso.html">Côté Perso →</a>
         </div>
-        <div class="hero-card">
-          <h2>Ce que j’apporte</h2>
-          <ul class="checklist">
-            <li>Design minimal et lisible.</li>
-            <li>Navigation ergonomique.</li>
-            <li>Sites rapides et maintenables.</li>
-          </ul>
+        <div class="hero-social">
+          <a class="social-chip" href="https://github.com/V0latix" target="_blank" rel="noreferrer">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+          <a class="social-chip" href="https://www.linkedin.com/in/desmeulemester-romain-0563301b9/" target="_blank" rel="noreferrer">in LinkedIn</a>
+          <a class="social-chip" href="https://www.instagram.com/romaindesmeu/" target="_blank" rel="noreferrer">◎ Instagram</a>
+          <a class="social-chip" href="mailto:romain.desmeulemester@gmail.com">@ Email</a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="a-propos">
+    <section class="hub">
       <div class="container">
-        <div class="section-header">
-          <h2>À propos</h2>
-          <p class="section-lead">
-            Mon objectif : transformer des idées en expériences web simples, élégantes et efficaces.
-          </p>
-        </div>
-        <div class="cards">
-          <article class="card">
-            <h3>Design UI</h3>
-            <p>Des interfaces structurées avec des contenus hiérarchisés et des marges généreuses.</p>
-          </article>
-          <article class="card">
-            <h3>Développement</h3>
-            <p>Un code propre en HTML/CSS/JS, optimisé pour la vitesse et la stabilité.</p>
-          </article>
-          <article class="card">
-            <h3>Accessibilité</h3>
-            <p>Des pages utilisables par tous : contrastes, focus, sémantique et navigation clavier.</p>
-          </article>
+        <p class="hub-label">Sections</p>
+        <div class="hub-grid">
+          <a class="hub-tile hub-tile-primary" href="pro.html">
+            <span class="hub-emoji">💼</span>
+            <h2>Pro</h2>
+            <p>CV, projets, certifications et compétences techniques.</p>
+            <span class="hub-arrow">Voir la section →</span>
+          </a>
+          <a class="hub-tile" href="perso.html">
+            <span class="hub-emoji">🎯</span>
+            <h2>Perso</h2>
+            <p>Notes, listes et ce qui compte en dehors du boulot.</p>
+            <span class="hub-arrow">Explorer →</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <section class="section section-alt" id="projets">
-      <div class="container">
-        <div class="section-header">
-          <h2>Projets en vedette</h2>
-          <a class="link" href="cv-et-projets.html">Voir tous les projets</a>
-        </div>
-        <div class="cards">
-          <article class="card project-card">
-            <h3>Flashcards</h3>
-            <p>Application d’apprentissage avec sessions de révision et statistiques détaillées.</p>
-            <div class="tag-list">
-              <span class="tag">React</span>
-              <span class="tag">Supabase</span>
-              <span class="tag">UI</span>
-            </div>
-            <a class="link" href="https://v0latix.github.io/Flashcards/" target="_blank" rel="noreferrer">Voir le projet</a>
-          </article>
-          <article class="card project-card">
-            <h3>Projet à venir</h3>
-            <p>Présentez ici un projet client avec objectifs, livrables et résultats.</p>
-            <div class="tag-list">
-              <span class="tag">À compléter</span>
-            </div>
-            <span class="muted">Lien à ajouter</span>
-          </article>
-          <article class="card project-card">
-            <h3>Projet à venir</h3>
-            <p>Un second projet pour montrer la diversité de vos compétences.</p>
-            <div class="tag-list">
-              <span class="tag">À compléter</span>
-            </div>
-            <span class="muted">Lien à ajouter</span>
-          </article>
-        </div>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="cv-et-projets.html">Voir mon CV & projets</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-header">
-          <h2>Contact</h2>
-          <p class="section-lead">Discutons de votre projet ou d’une collaboration.</p>
-        </div>
-        <div class="cards contact-cards">
-          <article class="card">
-            <h3>Email</h3>
-            <p>Échange rapide pour cadrer un besoin ou un devis.</p>
-            <a class="link" href="mailto:romain.desmeulemester@gmail.com">romain.desmeulemester@gmail.com</a>
-          </article>
-          <article class="card">
-            <h3>LinkedIn</h3>
-            <p>Profil professionnel et recommandations.</p>
-            <a class="link" href="https://www.linkedin.com/in/desmeulemester-romain-0563301b9/" target="_blank" rel="noreferrer">Voir mon LinkedIn</a>
-          </article>
-          <article class="card">
-            <h3>GitHub</h3>
-            <p>Code, prototypes et projets open-source.</p>
-            <a class="link" href="https://github.com/votre-profil" target="_blank" rel="noreferrer">GitHub (à compléter)</a>
-          </article>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <p class="footer-title">Romain Desmeulemester</p>
-        <p class="muted">Développeur web • Paris</p>
-      </div>
-      <div class="social-links">
-        <a class="social-link" href="https://www.linkedin.com/in/desmeulemester-romain-0563301b9/" target="_blank" rel="noreferrer">
-          <span class="icon" aria-hidden="true">in</span>
-          <span>LinkedIn</span>
-        </a>
-        <a class="social-link" href="https://github.com/votre-profil" target="_blank" rel="noreferrer">
-          <span class="icon" aria-hidden="true">GH</span>
-          <span>GitHub (à compléter)</span>
-        </a>
-        <a class="social-link" href="mailto:romain.desmeulemester@gmail.com">
-          <span class="icon" aria-hidden="true">@</span>
-          <span>Email</span>
-        </a>
-        <a class="social-link" href="https://www.instagram.com/romaindesmeu/" target="_blank" rel="noreferrer">
-          <span class="icon" aria-hidden="true">IG</span>
-          <span>Instagram</span>
-        </a>
-      </div>
+    <div class="container footer-inner">
+      <a class="footer-brand" href="index.html">Romain Desmeulemester</a>
+      <span class="footer-muted">Paris · 2025</span>
     </div>
   </footer>
+
+  <script src="js/theme.js"></script>
 </body>
 </html>
