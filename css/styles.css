@@ -616,91 +616,94 @@ h3 {
    CERTIFICATIONS
    ═══════════════════════════════════════ */
 
-.certif-groups {
+.certif-tables {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-  border-left: var(--border-thin);
-  border-top: var(--border-thin);
+  gap: 32px;
+  align-items: start;
 }
 
-.certif-group {
-  border-right: var(--border-thin);
-  border-bottom: var(--border-thin);
-  padding: 24px 28px;
+.certif-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: var(--border-thin);
 }
 
-.certif-group-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: var(--border-thin);
-}
-
-.certif-group-issuer {
+.certif-table caption {
   font-family: var(--font-mono);
   font-size: 0.62rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--color-primary);
+  text-align: left;
+  padding: 10px 14px;
+  border: var(--border-thin);
+  border-bottom: var(--border-default);
+  background: var(--color-surface);
+  caption-side: top;
 }
 
-.certif-group-count {
+.certif-table th {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--color-text-secondary);
-}
-
-.certif-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.certif-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 11px 0;
+  padding: 8px 14px;
   border-bottom: var(--border-thin);
-  text-decoration: none;
-  transition:
-    background var(--fast),
-    padding-left var(--fast);
+  text-align: left;
+  background: var(--color-surface-muted);
 }
 
-.certif-row:last-child {
+.certif-table th:last-child {
+  text-align: right;
+}
+
+.certif-table td {
+  padding: 10px 14px;
+  border-bottom: var(--border-thin);
+  vertical-align: middle;
+}
+
+.certif-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-.certif-row:hover {
-  padding-left: 6px;
+.certif-table tbody tr:hover td {
+  background: var(--color-surface-muted);
 }
 
-.certif-row-name {
+.certif-td-name {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.85rem;
   letter-spacing: -0.01em;
   color: var(--color-text);
-  flex: 1;
 }
 
-.certif-row-action {
+.certif-td-action {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.certif-td-action a {
   font-family: var(--font-mono);
   font-size: 0.58rem;
   font-weight: 700;
   color: var(--color-primary);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  flex-shrink: 0;
+  text-decoration: none;
 }
 
-@media (max-width: 600px) {
-  .certif-groups {
+.certif-td-action a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .certif-tables {
     grid-template-columns: 1fr;
   }
 }
