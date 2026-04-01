@@ -616,39 +616,74 @@ h3 {
    CERTIFICATIONS
    ═══════════════════════════════════════ */
 
-.certif-list {
+.certif-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-left: var(--border-thin);
   border-top: var(--border-thin);
 }
 
-.certif-row {
+.certif-group {
+  border-right: var(--border-thin);
+  border-bottom: var(--border-thin);
+  padding: 24px 28px;
+}
+
+.certif-group-header {
   display: flex;
   align-items: baseline;
-  gap: 20px;
-  padding: 14px 0;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
   border-bottom: var(--border-thin);
-  text-decoration: none;
-  transition: background var(--fast);
 }
 
-.certif-row:hover {
-  background: var(--color-surface-muted);
-}
-
-.certif-row-issuer {
+.certif-group-issuer {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--color-primary);
-  flex-shrink: 0;
-  width: 80px;
+}
+
+.certif-group-count {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--color-text-secondary);
+}
+
+.certif-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.certif-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: var(--border-thin);
+  text-decoration: none;
+  transition:
+    background var(--fast),
+    padding-left var(--fast);
+}
+
+.certif-row:last-child {
+  border-bottom: none;
+}
+
+.certif-row:hover {
+  padding-left: 6px;
 }
 
 .certif-row-name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   letter-spacing: -0.01em;
   color: var(--color-text);
   flex: 1;
@@ -656,12 +691,18 @@ h3 {
 
 .certif-row-action {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   font-weight: 700;
   color: var(--color-primary);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .certif-groups {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ═══════════════════════════════════════
