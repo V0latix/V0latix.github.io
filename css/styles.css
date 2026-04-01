@@ -616,137 +616,52 @@ h3 {
    CERTIFICATIONS
    ═══════════════════════════════════════ */
 
-.certif-all-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
-  gap: 0;
-  border-left: var(--border-thin);
+.certif-list {
   border-top: var(--border-thin);
 }
 
-.certif-card {
+.certif-row {
   display: flex;
-  flex-direction: column;
-  border-right: var(--border-thin);
+  align-items: baseline;
+  gap: 20px;
+  padding: 14px 0;
   border-bottom: var(--border-thin);
-  background: var(--color-surface);
-  cursor: pointer;
   text-decoration: none;
-  transition:
-    border-color var(--fast),
-    background var(--fast);
+  transition: background var(--fast);
 }
 
-.certif-card:hover {
-  border-color: var(--color-primary);
+.certif-row:hover {
   background: var(--color-surface-muted);
 }
 
-.certif-card-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 16px 12px;
-  border-bottom: var(--border-thin);
-}
-
-.certif-card-visual img {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  display: block;
-}
-
-.certif-card-pdf-block {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 72px;
-  height: 72px;
-  border: var(--border-default);
-  background: var(--color-bg);
+.certif-row-issuer {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--color-text);
-}
-
-.certif-card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px 14px;
-}
-
-.certif-card-issuer {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.6rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: var(--color-primary);
+  flex-shrink: 0;
+  width: 80px;
 }
 
-.certif-card-name {
+.certif-row-name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   letter-spacing: -0.01em;
   color: var(--color-text);
-  line-height: 1.25;
+  flex: 1;
 }
 
-.certif-card-action {
+.certif-row-action {
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.6rem;
   font-weight: 700;
   color: var(--color-primary);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-top: 6px;
-}
-
-/* Lightbox */
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(10, 10, 10, 0.85);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-}
-
-.lightbox.is-open {
-  display: flex;
-}
-
-.lightbox-inner {
-  position: relative;
-  max-width: min(520px, calc(100vw - 2rem));
-}
-
-.lightbox-inner img {
-  display: block;
-  width: 100%;
-  border: var(--border-default);
-}
-
-.lightbox-close {
-  position: absolute;
-  top: -14px;
-  right: -14px;
-  width: 32px;
-  height: 32px;
-  background: var(--color-fg);
-  color: var(--color-bg);
-  border: none;
-  font-size: 1rem;
-  line-height: 32px;
-  text-align: center;
-  cursor: pointer;
-  font-family: var(--font-mono);
+  flex-shrink: 0;
 }
 
 /* ═══════════════════════════════════════
