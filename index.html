@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romain Desmeulemester — Développeur Web & Data</title>
+  <meta name="description" content="Portfolio de Romain Desmeulemester — développeur front-end passionné de data et d'IA, basé à Paris.">
+  <meta property="og:title" content="Romain Desmeulemester — Développeur Web & Data">
+  <meta property="og:description" content="Développeur front-end · Data · IA · Paris">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://v0latix.github.io/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Anti-FOUC -->
+  <script>(function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(t==='dark')document.documentElement.dataset.theme='dark';})()</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <!-- ═══════ HEADER ═══════ -->
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navigation principale">
+      <a class="nav-brand" href="#accueil">Romain D.</a>
+      <ul class="nav-links">
+        <li><a href="#experience">Expérience</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="assets/CV_2026-04-01_Romain_Desmeulemester.pdf" target="_blank" rel="noreferrer">CV PDF</a>
+        <a class="btn-icon" href="https://github.com/V0latix" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <button class="btn-icon theme-toggle" onclick="toggleTheme()" aria-label="Passer en mode sombre">&#9790;</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="hero" id="accueil">
+      <div class="container">
+        <div class="hero-inner">
+          <div>
+            <p class="kicker hero-kicker"><span class="kicker-accent">01</span> — Développeur Web & Data · Paris</p>
+            <h1>Romain<br>Desmeulemester</h1>
+            <p class="hero-sub">Front-end · Data · Intelligence Artificielle</p>
+          </div>
+        </div>
+
+        <div class="hero-divider"></div>
+
+        <div class="hero-bottom">
+          <p class="hero-pitch">
+            Je conçois et développe des <strong>interfaces modernes, propres et performantes</strong>.
+            Attiré par la donnée et l'IA, je construis des outils qui allient
+            expérience utilisateur soignée et logique data solide.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="assets/CV_2026-04-01_Romain_Desmeulemester.pdf" target="_blank" rel="noreferrer">
+              Télécharger le CV
+            </a>
+            <a class="btn btn-outline" href="#projets">Voir les projets ↓</a>
+          </div>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-value">3+</span>
+            <span class="hero-stat-label">Projets</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">Paris</span>
+            <span class="hero-stat-label">Localisation</span>
+          </div>
+          <div class="hero-stat">
+            <!-- TODO: mettre à jour selon ta situation -->
+            <span class="hero-stat-value">Dispo</span>
+            <span class="hero-stat-label">Statut</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">FR / EN</span>
+            <span class="hero-stat-label">Langues</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ EXPÉRIENCE ═══════ -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <p class="kicker"><span class="kicker-accent">02</span> — Expérience</p>
+          <h2>Parcours professionnel</h2>
+        </div>
+
+        <div class="exp-list">
+
+          <!-- TODO: remplacer par ta vraie expérience la plus récente -->
+          <div class="exp-item">
+            <div class="exp-meta">
+              <span class="exp-company">Entreprise</span>
+              <span class="exp-dates">Jan 2024 — Présent</span>
+            </div>
+            <p class="exp-role">Titre du poste</p>
+            <ul class="exp-bullets">
+              <li>Description de la mission ou de la réalisation principale.</li>
+              <li>Résultat concret ou impact mesurable (ex : réduction de X%, gain de Y).</li>
+              <li>Technologie ou méthode utilisée en contexte réel.</li>
+            </ul>
+            <div class="exp-tags">
+              <span class="tag">À compléter</span>
+            </div>
+          </div>
+
+          <!-- TODO: expérience précédente -->
+          <div class="exp-item">
+            <div class="exp-meta">
+              <span class="exp-company">Entreprise</span>
+              <span class="exp-dates">Sep 2022 — Déc 2023</span>
+            </div>
+            <p class="exp-role">Titre du poste</p>
+            <ul class="exp-bullets">
+              <li>Description de la mission ou de la réalisation principale.</li>
+              <li>Résultat concret ou impact mesurable.</li>
+            </ul>
+            <div class="exp-tags">
+              <span class="tag">À compléter</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ PROJETS ═══════ -->
+    <section class="section" id="projets">
+      <div class="container">
+        <div class="section-header">
+          <p class="kicker"><span class="kicker-accent">03</span> — Projets</p>
+          <h2>Réalisations</h2>
+        </div>
+
+        <div class="projects-grid">
+
+          <!-- Flashcards -->
+          <div class="project-card">
+            <p class="project-number">01 — PROJET</p>
+            <h3>Flashcards</h3>
+            <p>
+              Application web d'apprentissage par répétition espacée. Packs de cartes,
+              sessions de révision, statistiques avancées et algorithme de Leitner.
+            </p>
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">Supabase</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">UI</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="https://v0latix.github.io/Flashcards/" target="_blank" rel="noreferrer">Demo →</a>
+              <a class="btn btn-outline" href="https://github.com/V0latix/Flashcards" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
+
+          <!-- MyDashboard -->
+          <div class="project-card">
+            <p class="project-number">02 — PROJET</p>
+            <h3>MyDashboard</h3>
+            <p>
+              Dashboard personnel centralisant santé, finances, échecs et productivité.
+              Visualisations interactives, métriques en temps réel et design data-first.
+            </p>
+            <div class="project-tags">
+              <!-- TODO: confirmer les technos -->
+              <span class="tag">React</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Recharts</span>
+              <span class="tag">Vercel</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="https://volatixmydashboard.vercel.app" target="_blank" rel="noreferrer">Demo →</a>
+              <a class="btn btn-outline" href="https://github.com/V0latix" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ CERTIFICATIONS ═══════ -->
+    <section class="section" id="certifications">
+      <div class="container">
+        <div class="section-header">
+          <p class="kicker"><span class="kicker-accent">04</span> — Formations</p>
+          <h2>Certifications</h2>
+        </div>
+
+        <div class="certif-groups">
+
+          <!-- Kaggle — 7 badges image -->
+          <div class="certif-group">
+            <div class="certif-group-header">
+              <span class="certif-group-issuer">Kaggle</span>
+              <span class="certif-group-count">7 certifications</span>
+            </div>
+            <div class="certif-badges-row">
+              <div class="certif-badge-item">
+                <img src="assets/certifications/Python.png" alt="Kaggle Python" loading="lazy">
+                <span class="certif-badge-name">Python</span>
+              </div>
+              <div class="certif-badge-item">
+                <img src="assets/certifications/Pandas.png" alt="Kaggle Pandas" loading="lazy">
+                <span class="certif-badge-name">Pandas</span>
+              </div>
+              <div class="certif-badge-item">
+                <img src="assets/certifications/Intro-to-Programming.png" alt="Kaggle Intro to Programming" loading="lazy">
+                <span class="certif-badge-name">Intro to Programming</span>
+              </div>
+              <div class="certif-badge-item">
+                <img src="assets/certifications/Intro-to-Machine-Learning.png" alt="Kaggle Intro to Machine Learning" loading="lazy">
+                <span class="certif-badge-name">Intro to ML</span>
+              </div>
+              <div class="certif-badge-item">
+                <img src="assets/certifications/Intermediate-Machine-Learning.png" alt="Kaggle Intermediate Machine Learning" loading="lazy">
+                <span class="certif-badge-name">Intermediate ML</span>
+              </div>
+              <div class="certif-badge-item">
+                <img src="assets/certifications/Data- Visualization.png" alt="Kaggle Data Visualization" loading="lazy">
+                <span class="certif-badge-name">Data Visualization</span>
+              </div>
+              <div class="certif-badge-item">
+                <img src="assets/certifications/Feature-Engineering.png" alt="Kaggle Feature Engineering" loading="lazy">
+                <span class="certif-badge-name">Feature Engineering</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anthropic — 3 PDFs -->
+          <div class="certif-group">
+            <div class="certif-group-header">
+              <span class="certif-group-issuer">Anthropic</span>
+              <span class="certif-group-count">3 certifications</span>
+            </div>
+            <div class="certif-pdf-list">
+              <a class="certif-pdf-item" href="assets/certifications/Claude-101.pdf" target="_blank" rel="noreferrer">
+                <span class="certif-pdf-icon">🤖</span>
+                <span class="certif-pdf-name">Claude 101</span>
+                <span class="certif-pdf-action">↗ PDF</span>
+              </a>
+              <a class="certif-pdf-item" href="assets/certifications/Claude-Code-in-Action.pdf" target="_blank" rel="noreferrer">
+                <span class="certif-pdf-icon">⌨️</span>
+                <span class="certif-pdf-name">Claude Code in Action</span>
+                <span class="certif-pdf-action">↗ PDF</span>
+              </a>
+              <a class="certif-pdf-item" href="assets/certifications/AI-Fluency.pdf" target="_blank" rel="noreferrer">
+                <span class="certif-pdf-icon">✦</span>
+                <span class="certif-pdf-name">AI Fluency</span>
+                <span class="certif-pdf-action">↗ PDF</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ COMPÉTENCES ═══════ -->
+    <section class="section" id="competences">
+      <div class="container">
+        <div class="section-header">
+          <p class="kicker"><span class="kicker-accent">05</span> — Compétences</p>
+          <h2>Stack technique</h2>
+        </div>
+
+        <div class="skills-grid">
+
+          <div class="skills-group">
+            <p class="skills-group-label">Front-end</p>
+            <ul class="skills-list">
+              <li class="skill-item">
+                <span class="skill-name">HTML / CSS</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span>
+                </span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">JavaScript</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">React</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">TypeScript</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">UI Design</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="skills-group">
+            <p class="skills-group-label">Data & IA</p>
+            <ul class="skills-list">
+              <li class="skill-item">
+                <span class="skill-name">Python</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Data Analysis</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Machine Learning</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot"></span><span class="skill-dot"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Prompt Engineering</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">LLM / IA</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="skills-group">
+            <p class="skills-group-label">Outils & Infra</p>
+            <ul class="skills-list">
+              <li class="skill-item">
+                <span class="skill-name">Git / GitHub</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">Supabase</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+              <li class="skill-item">
+                <span class="skill-name">GitHub Pages</span>
+                <span class="skill-level">
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot filled"></span><span class="skill-dot filled"></span>
+                  <span class="skill-dot"></span>
+                </span>
+              </li>
+              <!-- TODO: ajouter d'autres outils que tu maîtrises -->
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════ CONTACT ═══════ -->
+  <section class="contact-section" id="contact" aria-label="Contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-copy">
+          <p class="kicker" style="color: rgba(247,247,245,0.45); margin-bottom: 8px;"><span style="color: rgba(247,247,245,0.7);">06</span> — Contact</p>
+          <h2>Travaillons ensemble.</h2>
+          <p>Disponible pour des missions, un poste ou une collaboration.</p>
+        </div>
+        <div class="contact-links">
+          <a class="btn btn-outline" href="mailto:romain.desmeulemester@gmail.com">
+            @ Email
+          </a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/desmeulemester-romain-0563301b9/" target="_blank" rel="noreferrer">
+            in LinkedIn
+          </a>
+          <a class="btn btn-outline" href="https://github.com/V0latix" target="_blank" rel="noreferrer">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+          <a class="btn btn-outline" href="https://www.instagram.com/romaindesmeu/" target="_blank" rel="noreferrer">
+            ◎ Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-name">Romain Desmeulemester</span>
+      <span class="footer-meta">Paris · 2025 · v0latix.github.io</span>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>
